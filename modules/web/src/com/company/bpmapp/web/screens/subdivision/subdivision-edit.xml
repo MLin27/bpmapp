@@ -7,8 +7,9 @@
         <instance id="subdivisionDc"
                   class="com.company.bpmapp.entity.Subdivision">
             <view extends="_local">
-                <property name="leadingSubdivision" view="_minimal">
+                <property name="leadingSubdivision" view="_local">
                     <property name="code"/>
+                    <property name="headOfDepartment"/>
                 </property>
             </view>
             <loader/>
@@ -22,6 +23,12 @@
                 <textField id="codeField" property="code"/>
                 <textField id="nameField" property="name"/>
                 <pickerField id="leadingSubdivisionField" property="leadingSubdivision">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <pickerField id="headOfSubdivisionField" property="headOfDepartment">
                     <actions>
                         <action id="lookup" type="picker_lookup"/>
                         <action id="clear" type="picker_clear"/>

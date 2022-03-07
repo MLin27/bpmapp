@@ -5,4 +5,9 @@
         <property name="user" view="_base" fetch="AUTO">
         </property>
     </view>
+    <view entity="bpmapp_Subdivision" name="subdivision-view" extends="_local">
+        <property name="headOfDepartment" view="_minimal">
+            <property name="user" view="_minimal"/>
+        </property>
+    </view>
 </views>

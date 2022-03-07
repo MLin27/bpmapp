@@ -20,6 +20,8 @@
                 <property name="executor" view="_minimal"/>
                 <property name="author" view="_minimal"/>
                 <property name="journal" view="_local"/>
+                <property name="cause" view="_local" fetch="AUTO"/>
+
             </view>
             <loader/>
             <collection id="fileDc" property="file"/>
@@ -56,6 +58,12 @@
                         </actions>
                     </pickerField>
                     <pickerField id="authorField" property="author">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                    <pickerField id="signField" property="signatory">
                         <actions>
                             <action id="lookup" type="picker_lookup"/>
                             <action id="clear" type="picker_clear"/>
