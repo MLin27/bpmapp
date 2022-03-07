@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-bpmapp" insertBefore="administration" caption="mainMsg://menu_config.application-bpmapp">
+        <item screen="bpmapp_Subdivision.browse" caption="mainMsg://menu_config.bpmapp_Subdivision.browse"/>
+        <item screen="bpmapp_Employee.browse" caption="mainMsg://menu_config.bpmapp_Employee.browse"/>
+        <item screen="bpmapp_Document.browse" caption="mainMsg://menu_config.bpmapp_Document.browse"/>
+        <item screen="bpmapp_Organisation.browse" caption="mainMsg://menu_config.bpmapp_Organisation.browse"/>
+        <item screen="bpmapp_Journal.browse" caption="mainMsg://menu_config.bpmapp_Journal.browse"/>
+        <item screen="bpmapp_Nomenclature.browse" caption="mainMsg://menu_config.bpmapp_Nomenclature.browse"/>
+        <item screen="bpmapp_OutgoingDocument.browse" caption="mainMsg://menu_config.bpmapp_OutgoingDocument.browse"/>
+    </menu>
+</menu-config>

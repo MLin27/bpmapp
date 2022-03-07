@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://employeeEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.bpmapp.web.screens.employee">
+    <data>
+        <instance id="employeeDc"
+                  class="com.company.bpmapp.entity.Employee">
+            <view extends="_local">
+                <property name="user" view="_minimal">
+                    <property name="firstName"/>
+                    <property name="lastName"/>
+                    <property name="middleName"/>
+                </property>
+                <property name="subdivision" view="_minimal"/>
+                <property name="photo" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="employeeDc">
+            <column width="350px">
+                <textField id="offIDField" property="offID"/>
+                <pickerField id="userField" property="user">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textField id="lastNameField" property="lastName"/>
+                <textField id="firstNameField" property="firstName"/>
+                <textField id="middleNameField" property="middleName"/>
+                <pickerField id="subdivisionField" property="subdivision">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textField id="emailField" property="email"/>
+                <textField id="phoneNumberField" property="phoneNumber"/>
+                <upload id="photoField" fileStoragePutMode="IMMEDIATE" property="photo" showFileName="true"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://outgoingDocumentEditAction.caption"
+        focusComponent="form"
+        messagesPack="com.company.bpmapp.web.screens.outgoingdocument">
+    <data>
+        <instance id="outgoingDocumentDc"
+                  class="com.company.bpmapp.entity.OutgoingDocument">
+            <view extends="_minimal">
+                <property name="documentType" view="_minimal"/>
+                <property name="signatory" view="_minimal">
+                    <property name="offID"/>
+                    <property name="user" view="_minimal"/>
+                </property>
+                <property name="coordinator" view="_minimal">
+                    <property name="offID"/>
+                    <property name="user" view="_minimal"/>
+                </property>
+                <property name="taskStartDate"/>
+                <property name="taskCompleteDate"/>
+                <property name="result"/>
+                <property name="comment"/>
+                <property name="state"/>
+                <property name="registrationNumber"/>
+                <property name="registrationDate"/>
+                <property name="executor" view="_minimal">
+                    <property name="offID"/>
+                    <property name="user" view="_minimal"/>
+                </property>
+                <property name="author" view="_minimal"/>
+                <property name="creationDate"/>
+            </view>
+            <loader id="outgoingDocumentDl"/>
+
+        </instance>
+        <collection id="procAttachmentsDc"
+                    class="com.haulmont.bpm.entity.ProcAttachment"
+                    view="procAttachment-browse">
+            <loader id="procAttachmentsDl">
+                <query><![CDATA[select e from bpm$ProcAttachment e
+                                where e.procInstance.entity.entityId  = :entityId
+                                order by e.createTs]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions"
+            spacing="true">
+        <form id="form"
+              dataContainer="outgoingDocumentDc">
+
+        </form>
+        <groupBox id="procActionsBox"
+                  caption="Process"
+                  spacing="true"
+                  width="AUTO"
+                  orientation="vertical">
+            <fragment id="procActionsFragment"
+                      screen="bpm_ProcActionsFragment"/>
+        </groupBox>
+        <groupBox caption="Attachments"
+                  height="300px"
+                  spacing="true"
+                  width="700px">
+            <table id="attachmentsTable"
+                   dataContainer="procAttachmentsDc"
+                   height="100%"
+                   width="100%">
+                <columns>
+                    <column id="file.name"/>
+                    <column id="author"/>
+                    <column id="type"/>
+                    <column id="comment"
+                            maxTextLength="50"/>
+                </columns>
+            </table>
+        </groupBox>
+        <hbox id="editActions"
+              spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowCommit"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

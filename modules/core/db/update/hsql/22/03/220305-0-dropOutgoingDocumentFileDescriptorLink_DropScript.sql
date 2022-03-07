@@ -1,0 +1,1 @@
+drop table BPMAPP_OUTGOING_DOCUMENT_FILE_DESCRIPTOR_LINK__U73937 if exists cascade ;

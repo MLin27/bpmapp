@@ -1,0 +1,1 @@
+alter table BPMAPP_OUTGOING_DOCUMENT drop column REGISTRATION_DATE__U43026 cascade ;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="bpmapp" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.company.bpmapp.entity.Subdivision</class>
+        <class>com.company.bpmapp.entity.Employee</class>
+        <class>com.company.bpmapp.entity.Document</class>
+        <class>com.company.bpmapp.entity.Organisation</class>
+        <class>com.company.bpmapp.entity.Journal</class>
+        <class>com.company.bpmapp.entity.Nomenclature</class>
+        <class>com.company.bpmapp.entity.OutgoingDocument</class>
+    </persistence-unit>
+</persistence>

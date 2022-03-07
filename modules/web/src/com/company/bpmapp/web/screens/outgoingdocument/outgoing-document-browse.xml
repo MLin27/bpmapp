@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://outgoingDocumentBrowse.caption"
+
+        messagesPack="com.company.bpmapp.web.screens.outgoingdocument">
+    <data readOnly="true">
+        <collection id="outgoingDocumentsDc"
+                    class="com.company.bpmapp.entity.OutgoingDocument">
+            <view extends="_local">
+                <property name="documentType" view="_minimal"/>
+                <property name="executor" view="_minimal"/>
+                <property name="author" view="_minimal"/>
+                <property name="file" view="_minimal"/>
+                <property name="coordinator" view="_minimal"/>
+                <property name="journal" view="_local"/>
+                <property name="cause" view="_minimal"/>
+
+
+            </view>
+            <loader id="outgoingDocumentsDl">
+                <query>
+                    <![CDATA[select e from bpmapp_OutgoingDocument e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="employeesDc" class="com.company.bpmapp.entity.Employee">
+            <view extends="_local"/>
+            <loader id="employeesDl">
+                <query>
+                    <![CDATA[select e from bpmapp_Employee e]]>
+                </query>
+            </loader>
+        </collection>
+
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+
+
+    <layout
+            spacing="true">
+        <tabSheet>
+            <tab id="mainTab" caption="msg://mainTab" margin="true" spacing="true">
+                <filter id="filter"
+                        applyTo="outgoingDocumentsTable"
+                        dataLoader="outgoingDocumentsDl">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="outgoingDocumentsTable"
+                            width="100%"
+                            dataContainer="outgoingDocumentsDc"
+                            multiselect="true">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                        <action id="run" type="runReport"/>
+
+                    </actions>
+                    <columns>
+                        <column id="documentType"/>
+                        <column id="registrationNumber"/>
+                        <column id="registrationDate"/>
+                        <column id="addressee"/>
+                        <column id="toWhom"/>
+                        <column id="topic"/>
+                        <column id="executor"/>
+                        <column id="author"/>
+                        <column id="note"/>
+                        <column id="name"/>
+                        <column id="creationDate"/>
+                        <column id="editDate"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="outgoingDocumentsTable.create"/>
+                        <button id="editBtn" action="outgoingDocumentsTable.edit"/>
+                        <button id="removeBtn" action="outgoingDocumentsTable.remove"/>
+
+                        <button id="runBtn" action="outgoingDocumentsTable.run" icon="icons/reports-print.png"/>
+                    </buttonsPanel>
+                </groupTable>
+                <hbox id="lookupActions" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </tab>
+            <tab id="additionalTab" caption="msg://DocTab" margin="true" spacing="true">
+                <filter id="filter1"
+                        applyTo="outgoingDocumentsTable_doc"
+                        dataLoader="outgoingDocumentsDl">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="outgoingDocumentsTable_doc"
+                            width="100%"
+                            dataContainer="outgoingDocumentsDc">
+                    <actions>
+
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="documentType"/>
+                        <column id="file"/>
+
+                    </columns>
+                    <rowsCount/>
+
+                </groupTable>
+                <hbox id="lookupActions_doc" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </tab>
+            <tab id="journalTab" caption="msg://JournalTab" margin="true" spacing="true">
+                <groupTable id="outgoingDocumentsTable_journal"
+                            width="100%"
+                            dataContainer="outgoingDocumentsDc">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="documentType"/>
+                        <column id="journal"/>
+                        <column id="registrationNumber"/>
+                        <column id="registrationDate"/>
+                        <column id="content"/>
+                        <column id="cause"/>
+                        <column id="redirectedToCause"/>
+
+                    </columns>
+                    <buttonsPanel id="buttonsPanel_journal"
+                                  alwaysVisible="true">
+                        <button id="createBtn_j" action="outgoingDocumentsTable.create"/>
+                        <button id="editBtn_j" action="outgoingDocumentsTable.edit"/>
+                        <button id="removeBtn_j" action="outgoingDocumentsTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+
+            </tab>
+            <tab id="approvalTab" caption="msg://ProcessTab" margin="true" spacing="true">
+
+                <groupTable id="outgoingDocumentsTable_approval"
+                            width="100%"
+                            dataContainer="outgoingDocumentsDc">
+                    <actions>
+
+                        <action id="viewActions" type="edit">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                                <property name="screenClass" value="com.company.bpmapp.web.screens.outgoingdocument.OutgoingDocumentEditAction"/>
+                            </properties>
+                        </action>
+
+                    </actions>
+                    <columns>
+                        <column id="documentType"/>
+                        <column id="registrationNumber"/>
+                        <column id="coordinator"/>
+                        <column id="taskStartDate"/>
+                        <column id="taskCompleteDate"/>
+                        <column id="result"/>
+                        <column id="comment"/>
+                        <column id="state" />
+                    </columns>
+                    <buttonsPanel id="buttonsPanel_approval"
+                                  alwaysVisible="true">
+
+                        <button id="actionProcBtn" action="outgoingDocumentsTable_approval.viewActions" caption="Actions"/>
+
+                    </buttonsPanel>
+                </groupTable>
+            </tab>
+
+        </tabSheet>
+    </layout>
+</window>

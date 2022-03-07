@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="bpmapp_Employee" name="employee-view-user" extends="_base">
+        <property name="user" view="_base" fetch="AUTO">
+        </property>
+    </view>
+</views>

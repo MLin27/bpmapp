@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://organisationBrowse.caption"
+        focusComponent="organisationsTable"
+        messagesPack="com.company.bpmapp.web.screens.organisation">
+    <data readOnly="true">
+        <collection id="organisationsDc"
+                    class="com.company.bpmapp.entity.Organisation">
+            <view extends="_local"/>
+            <loader id="organisationsDl">
+                <query>
+                    <![CDATA[select e from bpmapp_Organisation e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="organisationsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="organisationsTable"
+                dataLoader="organisationsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="organisationsTable"
+                    width="100%"
+                    dataContainer="organisationsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="code"/>
+                <column id="shortName"/>
+                <column id="fullName"/>
+                <column id="fiscalAddress"/>
+                <column id="address"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="organisationsTable.create"/>
+                <button id="editBtn" action="organisationsTable.edit"/>
+                <button id="removeBtn" action="organisationsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
